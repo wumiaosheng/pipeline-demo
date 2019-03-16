@@ -19,12 +19,7 @@ pipeline {
         stage('Maven Build') {
 
             when { expression { env.GIT_TAG != null } }
-            agent {
-                docker {
-                    image 'maven:3-jdk-8-alpine'
-                    args '-v $HOME/.m2:/root/.m2'
-                }
-            }
+
             steps {
                 sh 'echo "maven build 。。。。。start"'
                 sh 'pwd'
