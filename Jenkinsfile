@@ -26,10 +26,10 @@ pipeline {
                 }
             }
             steps {
-                echo 'maven build 。。。。。start'
-                sh 'mvn clean package -Dfile.encoding=UTF-8 -DskipTests=true'
-                stash includes: 'target/*.jar', name: 'app'
-                echo 'maven build 。。。。。end'
+                sh 'echo "maven build 。。。。。start"'
+                sh 'pwd'
+
+                 sh 'echo "maven build 。。。。。end"'
             }
 
 
