@@ -17,6 +17,7 @@ pipeline {
     }
     stages {
         stage('Maven Build') {
+            print("maven build 。。。。。start")
             when { expression { env.GIT_TAG != null } }
             agent {
                 docker {
@@ -28,6 +29,8 @@ pipeline {
                 sh 'mvn clean package -Dfile.encoding=UTF-8 -DskipTests=true'
                 stash includes: 'target/*.jar', name: 'app'
             }
+
+             print("maven build 。。。。。end")
 
         }
     }
