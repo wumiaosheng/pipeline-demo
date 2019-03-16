@@ -5,7 +5,7 @@
 pipeline {
     agent any
     environment {
-        HARBOR_CREDS = credentials('jenkins-harbor-creds')
+        /// HARBOR_CREDS = credentials('jenkins-harbor-creds')
         // K8S_CONFIG = credentials('jenkins-k8s-config')
         /// GIT_TAG = sh(returnStdout: true,script: 'git describe --tags').trim()
     }
@@ -18,13 +18,12 @@ pipeline {
     stages {
         stage('Maven Build') {
 
-            when { expression { env.GIT_TAG != null } }
 
             steps {
-                sh 'echo "maven build 。。。。。start"'
-                sh 'pwd'
-
-                 sh 'echo "maven build 。。。。。end"'
+                echo 'maven build 。。。。。start'
+                sh 'mvn clean package -Dfile.encoding=UTF-8 -DskipTests=true'
+                stash includes: 'target/*.jar', name: 'app'
+                echo 'maven build 。。。。。end'
             }
 
 
