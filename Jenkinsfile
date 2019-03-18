@@ -15,6 +15,7 @@ pipeline {
     }
     stages {
         stage('Maven Build 构建。。') {
+            when { expression { env.GIT_TAG != null } }
             steps {
                 echo 'maven build 。。。。。start'
                 sh 'mvn clean package -Dfile.encoding=UTF-8 -DskipTests=true'
@@ -22,7 +23,11 @@ pipeline {
                 echo 'MAVEN build.......。。。。end'
             }
         }
-     stage('Docker Build 构建。。。。。') {
+        stage('Docker Build 构建。。。。。') {
+            when { allOf {
+                       expression { env.GIT_TAG != null }
+                   }
+             }
              agent any
              steps {
                  unstash 'app'
