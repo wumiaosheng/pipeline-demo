@@ -22,8 +22,7 @@ pipeline {
                 sh 'mvn clean package -Dfile.encoding=UTF-8 -DskipTests=true'
                 stash includes: 'target/*.jar', name: 'app'
                 echo 'maven build 。。。。。end'
-                sh "JAR_FILE=`ls target/*.jar |cut -d '/' -f2`"
-                echo JAR_FILE
+                sh "echo JAR_FILE=`ls target/*.jar |cut -d '/' -f2`"
                 echo '编译成功'
             }
         }
