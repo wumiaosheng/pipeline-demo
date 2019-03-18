@@ -32,9 +32,9 @@ pipeline {
              agent any
              steps {
                  unstash 'app'
-                 sh "sudo docker login -u admin -p Harbor12345 10.88.210.155"
-                 sh "sudo docker build --build-arg JAR_FILE=`ls target/*.jar |cut -d '/' -f2` -t ${params.HARBOR_HOST}/${params.DOCKER_IMAGE}:${GIT_TAG} ."
-                 sh "sudo docker push ${params.HARBOR_HOST}/${params.DOCKER_IMAGE}:${GIT_TAG}"
+                 sh "docker login -u admin -p Harbor12345 10.88.210.155"
+                 sh "docker build --build-arg JAR_FILE=`ls target/*.jar |cut -d '/' -f2` -t ${params.HARBOR_HOST}/${params.DOCKER_IMAGE}:${GIT_TAG} ."
+                 sh "docker push ${params.HARBOR_HOST}/${params.DOCKER_IMAGE}:${GIT_TAG}"
                //  sh "docker rmi ${params.HARBOR_HOST}/${params.DOCKER_IMAGE}:${GIT_TAG}"
              }
          }
