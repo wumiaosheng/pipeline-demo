@@ -29,7 +29,6 @@ pipeline {
                        expression { env.GIT_TAG != null }
                    }
              }
-             agent any
              steps {
                  unstash 'app'
                  sh "docker login -u admin -p Harbor12345 10.88.210.155"
