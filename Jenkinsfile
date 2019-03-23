@@ -29,14 +29,17 @@ pipeline {
                        expression { env.GIT_TAG != null }
                    }
              }
-             steps {
-                 unstash 'app'
-                 sh "docker login -u admin -p Harbor12345 10.88.210.155"
-                 sh "docker build --build-arg JAR_FILE=`ls target/*.jar |cut -d '/' -f2` -t ${params.HARBOR_HOST}/${params.DOCKER_IMAGE}:${GIT_TAG} ."
-                 sh "docker push ${params.HARBOR_HOST}/${params.DOCKER_IMAGE}:${GIT_TAG}"
-               //  sh "docker rmi ${params.HARBOR_HOST}/${params.DOCKER_IMAGE}:${GIT_TAG}"
-             }
+
          }
+
+          stage('depley  构建。。。。。') {
+                      when {
+                           allOf {
+                                 expression { env.GIT_TAG != null }
+                             }
+                       }
+
+                   }
 
     }
 
