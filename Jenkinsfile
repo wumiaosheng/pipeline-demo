@@ -29,17 +29,21 @@ pipeline {
                        expression { env.GIT_TAG != null }
                    }
              }
-
+            steps {
+                  echo 'maven build 。。。。。start'
+            }
          }
 
           stage('depley  构建。。。。。') {
-                      when {
-                           allOf {
-                                 expression { env.GIT_TAG != null }
-                             }
-                       }
-
-                   }
+              when {
+                   allOf {
+                         expression { env.GIT_TAG != null }
+                     }
+               }
+                steps {
+                      echo 'maven build 。。。。。start'
+                }
+          }
 
     }
 
