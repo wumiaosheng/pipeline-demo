@@ -3,7 +3,7 @@
 // cut -d: -f 1 /etc/passwd > /tmp/users 
 //   -d用来定义分隔符，默认为tab键，-f表示需要取得哪个字段
 pipeline {
-    agent any
+    agent { label 'nlpt-java-builder' }
     environment {
             HARBOR_CREDS = credentials('jenkins-harbor-creds')
             GIT_TAG = sh(returnStdout: true,script: 'git describe --tags').trim()
